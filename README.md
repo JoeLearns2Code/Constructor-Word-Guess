@@ -6,6 +6,7 @@ You are given 10 guesses.  If you guess correctly, you win the game.  If you run
 
 If you are not very familiar with Warcraft characters, feel free to look their names up from a myriad of resources online, or if you prefer simply view the characters array in the index.js file.
 
+![Word Guess Demo](demo_files/win_game.gif)
 
 ## Getting Started
 
