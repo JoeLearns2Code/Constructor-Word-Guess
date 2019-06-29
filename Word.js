@@ -6,28 +6,30 @@ var Letter = require("./Letter.js");
 function Word(chosenWord) {
     //object array to push chosen word into
 
-    this.chosenArray = [];
+    this.wordArray = [];
     //run letters of chosen word through Letter constructor and push into array
     for (var i = 0; i < chosenWord.length; i++) {
         var letter = new Letter(chosenWord[i]);
-        this.chosenArray.push(letter);
+        this.wordArray.push(letter);
     }
 
-    //display this data in the terminal
+    //display this data in the console
     this.guessedLet = function () {
         guessedLetter = "";
-        for (var i = 0; i < this.chosenArray.length; i++) {
-            guessedLetter += this.chosenArray[i] + " ";
+        for (var i = 0; i < this.wordArray.length; i++) {
+            guessedLetter += this.wordArray[i] + " ";
         }
         console.log(guessedLetter + "\n=========================\n");
     };
     //run letters through matchLetter function to determine value of each letter
     this.userGuess = function (input) {
-        for (var i = 0; i < this.chosenArray.length; i++) {
-            this.chosenArray[i].matchLetter(input);
+        for (var i = 0; i < this.wordArray.length; i++) {
+            this.wordArray[i].matchLetter(input);
         }
     }
-    console.log(chosenArray);
+    //Test this page by running the functions below:
+    // guessedLet();
+    // console.log(wordArray);
 };
 
 //export

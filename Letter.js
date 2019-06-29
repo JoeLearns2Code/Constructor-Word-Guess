@@ -1,4 +1,4 @@
-//TODO: Function for the individual letters.  Letter guessed boolean starts as False.  If user input equals the actual letter, boolean becomes true.
+//Function for the individual letters.  Letter guessed boolean starts as False.  If user input equals the actual letter, boolean becomes true.
 
 function Letter(letter) {
     this.letter = letter;
@@ -32,4 +32,5 @@ function Letter(letter) {
 
 module.exports = Letter;
 
+//Test this file:
 // Letter();
