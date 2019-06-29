@@ -68,7 +68,6 @@ function wordGuess() {
                 } else {
                     //use an empty array to compare with completedWord array
                     var wordCheckArray = [];
-                    console.log(wordCheckArray);
                     //run userGuess function on chosenWord with user's input as the variable
                     gameWord.userGuess(input.inputLetter);
                     //wordCheck pushes the guessState of input into the wordCheckArray
@@ -77,16 +76,16 @@ function wordGuess() {
                     //check if guess is correct or not
                     //if letter is not in the completed word, it should give a message, deduct a guess from the count.  It will have a false state if it's incorrect, equal to the state of at least one remaining character in completedWord.
                     if (wordCheckArray.join("") === completedWord.join("")) {
-                        console.log("\nINCORRECT!\n")
+                        console.log("\x1b[31m%s\x1b[0m", "\nINCORRECT!\n")
                         guessCount--;
                         guessedLetterArray.push(input.inputLetter);
-                        console.log(guessCount + " guesses remain!")
+                        console.log(guessCount + " guesses remain!\n")
                     } else {
-                        console.log("\nCORRECT!\n");
+                        console.log("\x1b[32m%s\x1b[0m", "\nCORRECT!\n");
                         guessedLetterArray.push(input.inputLetter);
                     }
 
-
+                    //push input guessState into wordCheckArray
                     function wordCheck(input) {
                      wordCheckArray.push(input.guessState);
                     }
@@ -104,7 +103,6 @@ function wordGuess() {
                     }  
                 }
             }
-
         })
     } else {
         //if no remaining characters in completedWord array have a false state, victory
