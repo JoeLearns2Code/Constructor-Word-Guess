@@ -25,7 +25,7 @@ function Letter(letter) {
             this.guessState = true;
         }
     }
-    console.log("this loaded");
+    // console.log("this loaded");
 };
 
 //export

@@ -3,13 +3,13 @@ var Letter = require("./Letter.js");
 
 //main function for Word.js
 
-function Word(chosenWord) {
+function Word(word) {
     //object array to push chosen word into
 
     this.wordArray = [];
     //run letters of chosen word through Letter constructor and push into array
-    for (var i = 0; i < chosenWord.length; i++) {
-        var letter = new Letter(chosenWord[i]);
+    for (var i = 0; i < word.length; i++) {
+        var letter = new Letter(word[i]);
         this.wordArray.push(letter);
     }
 
@@ -19,7 +19,7 @@ function Word(chosenWord) {
         for (var i = 0; i < this.wordArray.length; i++) {
             guessedLetter += this.wordArray[i] + " ";
         }
-        console.log(guessedLetter + "\n=========================\n");
+        console.log(guessedLetter + "\n\n=========================\n");
     };
     //run letters through matchLetter function to determine value of each letter
     this.userGuess = function (input) {
@@ -37,4 +37,4 @@ function Word(chosenWord) {
 module.exports = Word;
 
 //test function
-// Word();
+// Word("cat");

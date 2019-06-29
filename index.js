@@ -22,6 +22,7 @@ var chosenWord = loreCharacters[randomNum];
 
 //run this word through Word constructor
 var gameWord = new Word(chosenWord);
+// console.log(gameWord);
 //boolean for if a new word needs to be selected
 var selectNewWord = false;
 //array for guessed letters:
@@ -32,7 +33,7 @@ var guessedLetterArray = [];
 
 function wordGuess() {
     //Generate a new word if selectNewWord = true
-    if (selectNewWord = true) {
+    if (selectNewWord) {
         var randomNum = Math.floor(Math.random() * loreCharacters.length);
         var chosenWord = loreCharacters[randomNum];
 
@@ -40,9 +41,11 @@ function wordGuess() {
         selectNewWord = false;
     }
     //add an array for the completed word
-    var completedWord = []
-    //run completedMatchfunction on each letter of wordArray
-    gameWord.wordArray.forEach(completedMatch);
+    var completedWord = [];
+
+    //run pushState function on each letter of wordArray
+    gameWord.wordArray.forEach(pushState);
+    console.log(completedWord);
 
     //if completeWord array includes any false letters, run inquirer to prompt next guess
     if (completedWord.includes(false)) {
@@ -50,35 +53,55 @@ function wordGuess() {
             {
                 type: "input",
                 message: "Guess a letter from A to Z",
-                name: "userGuess"
+                name: "inputLetter"
 
             }
         ]).then(function (input) {
             //if characters not found in alphaArray variable are what user typed
-            if (!alphaArray.includes(input.userGuess) || input.userGuess.length > 1) {
+            if (!alphaArray.includes(input.inputLetter) || input.inputLetter.length > 1) {
                 console.log("\nAch!  Stick t' usin' letters will ya?\n");
                 wordGuess();
             } else {
                 //if user has already guessed the letter
-                if (completedWord.includes(input.userGuess)) {
+                if (guessedLetterArray.includes(input.inputLetter)) {
                     console.log("\nAlready guessed dat mon.\n");
                     wordGuess();
                 } else {
                     //use an empty array to compare with completedWord array
                     var wordCheckArray = [];
                     //run userGuess function on chosenWord with user's input as the variable
-                    chosenWord.userGuess(input.userGuess);
-                    //push the 
-                    chosenWord.wordArray.forEach(wordCheck);
+                    gameWord.userGuess(input.inputLetter);
+                     
+                    gameWord.wordArray.forEach(wordCheck);
 
                     //check if guess is correct or not
                     //if letter is not in the completed word, it will become an empty string equal to the empty string from the array
                     if (wordCheckArray.join("") === completedWord.join("")) {
                         console.log("\nINCORRECT!\n")
                         guessCount--;
-                        guessedLetterArray.push(input.userGuess);
+                        guessedLetterArray.push(input.inputLetter);
+                        console.log(guessCount + " guesses remain!")
+                    } else {
+                        console.log("CORRECT!\n");
+                        guessedLetterArray.push(input.inputLetter);
                     }
-                    
+
+
+                    function wordCheck(input) {
+                     wordCheckArray.push(input.inputLetter);
+                    }
+
+                    //log information in console:
+                    gameWord.guessedLet();
+                    console.log("Letters Guessed: " + guessedLetterArray);
+
+                    //guess count dependent functions
+                    if (guessCount > 0) {
+                        wordGuess();
+                    } else {
+                      console.log("You have lost.\n");
+                      playAgain();  
+                    }  
                 }
             }
 
@@ -87,13 +110,11 @@ function wordGuess() {
         console.log("Lok'tar Ogar!  Victory!\n");
         playAgain();
     };
-    
-    //function to push input into completedWord array
-    function completedMatch(input) {
-        completedWord.push(input.userGuess)
+    //function to push Letter guessed state into completedWord array
+    function pushState(input) {
+        
+        completedWord.push(input.guessState);
     };
-
-
 };
 
 //function to use inquirer and ask if user wants to play again
