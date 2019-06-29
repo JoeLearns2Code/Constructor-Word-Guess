@@ -23,7 +23,6 @@ var chosenWord = loreCharacters[randomNum];
 
 //run this word through Word constructor
 var gameWord = new Word(chosenWord);
-// console.log(gameWord);
 //boolean for if a new word needs to be selected
 var selectNewWord = false;
 //array for guessed letters:
@@ -71,24 +70,24 @@ function wordGuess() {
                     var wordCheckArray = [];
                     //run userGuess function on chosenWord with user's input as the variable
                     gameWord.userGuess(input.inputLetter);
-                     
+                    //wordCheck pushes the guessState of input into the wordCheckArray
                     gameWord.wordArray.forEach(wordCheck);
 
                     //check if guess is correct or not
-                    //if letter is not in the completed word, it will become an empty string equal to the empty string from the array
+                    //if letter is not in the completed word, it should give a message, deduct a guess from the count.  It will have a false state if it's incorrect, equal to the state of at least one remaining character in completedWord.
                     if (wordCheckArray.join("") === completedWord.join("")) {
-                        console.log("\nINCORRECT!\n")
+                        console.log("\x1b[31m%s\x1b[0m", "\nINCORRECT!\n")
                         guessCount--;
                         guessedLetterArray.push(input.inputLetter);
-                        console.log(guessCount + " guesses remain!")
+                        console.log(guessCount + " guesses remain!\n")
                     } else {
-                        console.log("CORRECT!\n");
+                        console.log("\x1b[32m%s\x1b[0m", "\nCORRECT!\n");
                         guessedLetterArray.push(input.inputLetter);
                     }
 
-
+                    //push input guessState into wordCheckArray
                     function wordCheck(input) {
-                     wordCheckArray.push(input.inputLetter);
+                     wordCheckArray.push(input.guessState);
                     }
 
                     //log information in console:
@@ -97,22 +96,21 @@ function wordGuess() {
 
                     //guess count dependent functions
                     if (guessCount > 0) {
-                        wordGuess();
+                      wordGuess();
                     } else {
-                      console.log("You have lost.\n");
+                      console.log("\nYou have lost.\n");
                       playAgain();  
                     }  
                 }
             }
-
         })
     } else {
-        console.log("Lok'tar Ogar!  Victory!\n");
+        //if no remaining characters in completedWord array have a false state, victory
+        console.log("\nLok'tar Ogar!  Victory!\n");
         playAgain();
     };
     //function to push Letter guessed state into completedWord array
     function pushState(input) {
-        
         completedWord.push(input.guessState);
     };
 };
