@@ -36,4 +36,5 @@ function Word(chosenWord) {
 
 module.exports = Word;
 
-Word("cat");
+//test function
+// Word();
