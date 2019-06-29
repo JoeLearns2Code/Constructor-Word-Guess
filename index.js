@@ -4,9 +4,10 @@ var Word = require("./Word.js");
 //enable inquirer package:
 var inquirer = require("inquirer");
 
+
 //variable of characters that will be accepted in function
 
-var alphaArray = "abcdefghijklmnopqrstuvwxyz";
+var alphaArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 //array of possible words used in word game
 
@@ -45,7 +46,6 @@ function wordGuess() {
 
     //run pushState function on each letter of wordArray
     gameWord.wordArray.forEach(pushState);
-    console.log(completedWord);
 
     //if completeWord array includes any false letters, run inquirer to prompt next guess
     if (completedWord.includes(false)) {
@@ -59,7 +59,7 @@ function wordGuess() {
         ]).then(function (input) {
             //if characters not found in alphaArray variable are what user typed
             if (!alphaArray.includes(input.inputLetter) || input.inputLetter.length > 1) {
-                console.log("\nAch!  Stick t' usin' letters will ya?\n");
+                console.log("\nAch!  Stick t' usin' single letters will ya?\n");
                 wordGuess();
             } else {
                 //if user has already guessed the letter
